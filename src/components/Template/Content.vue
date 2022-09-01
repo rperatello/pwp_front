@@ -23,11 +23,5 @@ export default {
     padding: 8px;
   }
 
-
-  @media only screen and (max-width: 1160px) {
-    .content{
-      /* top: 128px; */
-    }
-  } 
   
 </style>

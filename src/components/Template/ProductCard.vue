@@ -35,7 +35,7 @@
     },  
     watch: {},
     methods: {},
-    mounted() { console.log("entrou card")}
+    mounted() { }
   }
 </script>
 

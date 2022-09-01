@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="showCards">
         <div class="cardContainer" v-for="(product, index) in productList" :key="index">
             <ProductCardVue class="cardProduct" :product="product" ></ProductCardVue>
         </div>
@@ -44,7 +44,7 @@
 
 <style scoped>
 
-    .cardContainer{
+    .cardContainer, .showCards {
         display: flex;
         flex-wrap: wrap;
     }
