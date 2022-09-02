@@ -1,6 +1,6 @@
 <template>
-    <div class="col mb-5 ">
-        <div class="card h-100">
+    <div class="col mb-5">
+        <div class="card ">
             <!-- Sale badge-->
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta</div>
             <!-- Product image-->
@@ -45,6 +45,11 @@
     max-height: 55px;
     max-width: 55px;
     margin: 10px auto;
+}
+
+.card {
+    min-width: 220px;
+    min-height: 190px;
 }
 
 

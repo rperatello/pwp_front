@@ -1,6 +1,6 @@
 <template>
     <header class="bg-dark">    
-        <div>Folhinha.Net</div>
+        <!-- <div>Folhinha.Net</div> -->
     </header>
 </template>
 

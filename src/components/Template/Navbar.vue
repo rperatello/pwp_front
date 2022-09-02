@@ -1,14 +1,15 @@
 <template>
+  <div class="bg-dark">    
     <span>
       <b-navbar id="nav" class="nav-draggable"  type="dark" toggleable="lg" variant="dark">
       <b-navbar-toggle id='button-list' target="nav-collapse" class="align-items-center ml-0"> </b-navbar-toggle>
-  
+      
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class='all-menus nav-draggable'>
-            <b-nav-item href="#" to="/">Home</b-nav-item>
-            <b-nav-item href="#" to="/about">Sobre Nós</b-nav-item>
-            <b-nav-item href="#" to="/products">Produtos</b-nav-item>
-            <b-nav-item href="#" to="/offers">Ofertas</b-nav-item>
+            <b-nav-item href="" to="/">Home</b-nav-item>
+            <b-nav-item href="" to="/about">Sobre Nós</b-nav-item>
+            <b-nav-item href="" to="/products">Produtos</b-nav-item>
+            <b-nav-item href="" to="/offers">Ofertas</b-nav-item>
             <b-nav-item v-if="user" href="#" to="/update">Atualizar</b-nav-item>
             <b-nav-item v-if="!user"  href="#" to="/login">Login</b-nav-item>
             <b-nav-item v-if="user"  href="#" @click="logout()">Logout</b-nav-item>
@@ -22,6 +23,8 @@
       </b-collapse>
     </b-navbar>
     </span>
+    <span class="txtColor">Folhinha.Net</span>
+  </div>
   </template>
   
   <script>
@@ -81,6 +84,10 @@
   </script>
   
   <style>
+    
+    .txtColor{
+      color: white;
+    }
   
   :root{
     --width-dropdown: 310px;
