@@ -25,19 +25,16 @@
                 this.loading = true
                 this.$http
                     .get(`${baseURL}/product`)
-                    .then((res) => {     
-                        console.log("Entrou axios")             
+                    .then((res) => {              
                         console.log(res.data)
                         let fullList = res.data
                         this.productList = fullList.filter(x => x.offer == true)
-                        console.log("this.productList: ", this.productList)
                     })
                     .catch(() => {})
                     .finally(() => {this.loading = false})
             }
         },
         created () {
-            // this.user = this.$store.state.user;
             this.getProducts()
         }
     };

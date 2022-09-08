@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from "axios"
 
-export var baseURL = "http://localhost:90";
+export var baseURL = "http://192.168.15.140:90";
 
 export var clearAllData = function(){
     localStorage.clear()

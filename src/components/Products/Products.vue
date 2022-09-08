@@ -26,17 +26,14 @@
                 this.$http
                     .get(`${baseURL}/product`)
                     .then((res) => {     
-                        console.log("Entrou axios")             
                         console.log(res.data)
                         this.productList = res.data
-                        console.log("this.productList: ", this.productList)
                     })
                     .catch(() => {})
                     .finally(() => {this.loading = false})
             }
         },
         created () {
-            // this.user = this.$store.state.user;
             this.getProducts()
         }
     };

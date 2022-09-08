@@ -1,33 +1,36 @@
 <template>    
   <div>
       <div class="bg-dark py-5">    
+        <button class="float-right mr-3" :style="{'display': installBtn}" @click="installApp()">Instalar App</button>
           <div class="container px-4 px-lg-5 my-5">
               <div class="text-center text-white">
-                  <!--<h1 class="display-4 fw-bolder">Shop in style</h1> -->
-                  <span class = "circle-image">
-                      <img src = "@/assets/logo_pequeno.jpeg" />
-                      </span>
-                      <p class="lead mb-4">Bem vindo ao <em>Folhinha.Net</em> o site com os melhores produtos do seu supermercado preferido!</p>
-                      <p class="lead mb-4">Em nosso site você encontrar as melhores ofertas e os melhores produtos!</p>
-                      <button id="setup_button" onclick="installApp()">Instalar App</button>
+                  <span>
+                    <img class="logoBanner" src="@/assets/logo_pequeno.jpeg" />
+                  </span>
+                  <p class="lead mb-4">Bem vindo ao <em>Folhinha.Net</em> o site com os melhores produtos do seu supermercado preferido!</p>
+                  <p class="lead mb-4">Em nosso site você encontrar as melhores ofertas e os melhores produtos!</p>
+                  <!-- <button class="btInstall" onclick="installApp()">Instalar App</button> -->
               </div>
           </div>
       </div>
 
-      <div class="b-example-divider"></div>
+      <div class="b-example-divider"></div>     
+
     
       <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
-              <a href="ofertas.html">
-                  <img src="@/assets/ofertas.png" class="d-block mx-lg-auto img-fluid" alt="Logo Ofertas" width="400" height="200" loading="lazy">
-              </a>
+            <router-link to="/offers">
+              <img src="@/assets/ofertas.png" class="d-block mx-lg-auto img-fluid" alt="Logo Ofertas" width="400" height="200" loading="lazy" />            
+            </router-link>
           </div>
           <div class="col-lg-6">
             <h1 class="display-5 fw-bold lh-1 mb-3">As melhores ofertas do supermercado!</h1>
             <p class="lead">Verifique quais são as melhores ofertas que preparamos para você!</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <a href="ofertas.html" class="btn btn-primary btn-lg px-4 me-md-2">Ver Ofertas</a>                
+              <router-link to="/offers">
+                <a class="btn btn-primary btn-lg px-4 me-md-2">Ver Ofertas</a>            
+              </router-link>                             
             </div>
           </div>
         </div>
@@ -38,15 +41,17 @@
       <div class="container col-xxl-8 px-4 py-5">
           <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-              <a href="produtos.html">
-                  <img src="@/assets/produtos.png" class="d-block mx-lg-auto img-fluid" alt="Logo Ofertas" width="400" height="200" loading="lazy">
-              </a>
+              <router-link to="/products">
+                <img src="@/assets/produtos.png" class="d-block mx-lg-auto img-fluid" alt="Logo Ofertas" width="400" height="200" loading="lazy" />
+              </router-link> 
             </div>
             <div class="col-lg-6">
               <h1 class="display-5 fw-bold lh-1 mb-3">Os melhores produtos das melhores marcas!</h1>
               <p class="lead">Verifique a lista de produtos da melhor qualidade que temos para você!</p>
               <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="produtos.html" class="btn btn-primary btn-lg px-4 me-md-2">Ver Produtos</a>                
+                <router-link to="/products">
+                  <a class="btn btn-primary btn-lg px-4 me-md-2">Ver Produtos</a>
+                </router-link>                               
               </div>
             </div>
           </div>
@@ -61,10 +66,9 @@
             <p class="fs-5 mb-4">Este site foi desenvolvido para a disciplina de PWP (Programação de dispositivos Windows Phone) do curso de Especialização Lato Sensu em Desenvolvimento de Sistemas para Dispositivos Móveis (SDM).</p>
             <p class="fs-5 mb-4">Prof. Dr. Fernando Vernal Salina</p>
             <p class="fs-5 mb-4">Alunos: Luis Nakamura, Paula Milani e Roger Peratello</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <a href="https://scl.ifsp.edu.br/" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">IFSP São Carlos</a>
-              
-              <a href="https://www.ifsp.edu.br/" class="btn btn-outline-light btn-lg px-4">IFSP</a>
+            <div class="d-grid d-sm-flex justify-content-sm-center">
+              <a href="https://scl.ifsp.edu.br/" class="btn btn-outline-light btn-lg px-4 me-sm-3 fw-bold mr-2 ml-2">IFSP São Carlos</a>              
+              <a href="https://www.ifsp.edu.br/" class="btn btn-outline-light btn-lg px-4 mr-2 ml-2">IFSP</a>
             </div>
           </div>
         </div>
@@ -76,13 +80,66 @@
 
 <script>
 
+var installPrompt
+
+// const PRECACHE = 'precache-v1';
+// const RUNTIME = 'runtime';
+
 export default {
-  name: "cp-home"
+  name: "cp-home",
+  data() {
+    return {
+      installBtn: "none",
+      installer: undefined
+    }
+  },
+  methods: {
+    installApp() {
+      this.installBtn = "none";
+      installPrompt.prompt();
+      installPrompt.userChoice.then(result => {
+        if(result.outcome === "accepted")
+          console.log("User accepted")
+        else {
+          console.log("User denied")
+        }
+        installPrompt = null
+      })
+    }
+  },
+  created() {
+
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      installPrompt = e;
+      this.installBtn = "block"
+    })
+
+    // window.addEventListener('activate', event => {
+    //   const currentCaches = [PRECACHE, RUNTIME];
+    //   console.log("caches: ", caches)
+    //   event.waitUntil(
+    //       caches.keys().then(cacheNames => {
+    //           return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    //       }).then(cachesToDelete => {
+    //           return Promise.all(cachesToDelete.map(cacheToDelete => {
+    //               return caches.delete(cacheToDelete);
+    //           }));
+    //       }).then(() => self.clients.claim())
+    //   );
+    // });        
+  }
 };
 
 </script>
 
-<style scoped>
+<style>
+
+    .logoBanner {
+      border-radius: 75px;
+      margin-bottom: 20px;
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -134,7 +191,4 @@ export default {
       -webkit-overflow-scrolling: touch;
     }
 
-    #setup_button {
-      display: none;
-    }
 </style>

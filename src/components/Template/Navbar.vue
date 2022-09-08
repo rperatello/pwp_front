@@ -13,12 +13,6 @@
             <b-nav-item v-if="user" href="#" to="/update">Atualizar</b-nav-item>
             <b-nav-item v-if="!user"  href="#" to="/login">Login</b-nav-item>
             <b-nav-item v-if="user"  href="#" @click="logout()">Logout</b-nav-item>
-            <!-- <UserDropdown class='user-dropdown'></UserDropdown> -->
-       
-          <!-- <ShoppingDropdown></ShoppingDropdown> -->
-          <!-- <div class="fullScreen" @click="toggleFullScreen" >
-            <img class="Item" src="@/assets/tela_monitor.png" alt="Liga/Desliga tela cheia" />
-          </div> -->
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -29,27 +23,13 @@
   
   <script>
 
-//   import ShoppingDropdown from "./IniciarDropdownPGDI";
-//   import UserDropdown from "./UserDropdown";
   import { mapState } from "vuex";
   
   export default {
     name: "cp-navbar",
-    // components: {
-    //     ShoppingDropdown,
-    //     UserDropdown
-    // },
-    components: {
-        // UserDropdown
-    },
-  
+    components: {},  
     props: { },
-  
-  
     computed: mapState(["user"]),
-    // icon() {
-    //   return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down";
-    // },
     data() {
       return{
       }    
@@ -58,26 +38,12 @@
   
     methods: {
       logout() {
-        // localStorage.removeItem("userKey");
-        // localStorage.removeItem("tk");
+        localStorage.removeItem("userKey");
+        localStorage.removeItem("tk");
         this.$store.commit("setUser", null);
         this.$store.commit("setToken", null);
         this.$router.push({ path: "/" });
-      },
-      toggleFullScreen() {
-        var doc = window.document;
-        var docEl = doc.documentElement;
-  
-        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-  
-        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-          requestFullScreen.call(docEl);
-        }
-        else {
-          cancelFullScreen.call(doc);
-        }
-      },
+      }
     },
     created(){ }
   };
@@ -121,7 +87,7 @@
   }
   
   #button-list:hover{
-    background-color: #fff1;
+    background-color: #fff1;    
   }
   
   #button-list:active{
@@ -144,6 +110,8 @@
     position: absolute;
     left: 10px;
     top: 45px;
+    width: 130px;
+    border: #fff 1px solid;
   }
   
   .fullScreen {
